@@ -1,0 +1,7 @@
+pytest
+pytest-cov
+flake8
+pylint
+bandit
+pip-audit
+build

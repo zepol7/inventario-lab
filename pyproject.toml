@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "inventario-lab"
+dynamic = ["version"]
+description = "Gestor de inventario de equipos del laboratorio (proyecto de clase CI/CD)"
+requires-python = ">=3.10"
+
+[tool.setuptools.dynamic]
+version = { attr = "inventario.__version__" }
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+addopts = "-ra"
+
+[tool.coverage.run]
+source = ["src/inventario"]
+branch = true
+
+[tool.coverage.report]
+show_missing = true

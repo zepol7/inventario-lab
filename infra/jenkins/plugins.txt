@@ -1,0 +1,12 @@
+workflow-aggregator
+pipeline-stage-view
+git
+github
+github-branch-source
+credentials-binding
+junit
+coverage
+warnings-ng
+sonar
+timestamper
+ws-cleanup
