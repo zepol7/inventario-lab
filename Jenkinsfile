@@ -121,13 +121,25 @@ pipeline {
         }
 
         stage('Desplegar a produccion') {         // [Gestion] liberacion controlada
-            when { branch 'main' }
+            when {
+                beforeInput true                  // evalua el when ANTES de pedir aprobacion
+                anyOf {
+                    branch 'main'                         // despues del merge
+                    changeRequest target: 'main'          // PR abierto hacia main
+                }
+            }
             input {
                 message '¿Aprobar despliegue a produccion?'
                 ok 'Desplegar'
             }
             steps {
                 desplegar('produccion')
+            }
+        }
+
+        stage('Crear release') {                  // [Gestion] versionado
+            when { branch 'main' }                // solo tras el merge, nunca desde el PR
+            steps {
                 withCredentials([gitUsernamePassword(credentialsId: 'github-token', gitToolName: 'Default')]) {
                     sh '''
                         if git ls-remote --exit-code --tags origin "v$VERSION"; then
