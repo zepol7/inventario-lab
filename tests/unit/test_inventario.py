@@ -69,6 +69,6 @@ def test_reporte_por_estado(inventario):
 def test_valor_total(inventario):
     assert inventario.valor_total(date(2024, 1, 1)) > 0
 
+
 def test_conteo_por_tipo(inventario):
     assert inventario.conteo_por_tipo() == {"portatil": 1, "proyector": 1}
-
