@@ -99,3 +99,8 @@ class Inventario:
                 historial=d["historial"],
             ))
         return inventario
+    def conteo_por_tipo(self) -> dict[str, int]:
+        conteo: dict[str, int] = {}
+        for equipo in self._equipos.values():
+            conteo[equipo.tipo] = conteo.get(equipo.tipo, 0) + 1
+        return conteo
